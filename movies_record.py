@@ -35,7 +35,7 @@ class MovieRecords:
         self.Duration = StringVar()
         self.Description = StringVar()
         self.Directors = StringVar()
-        self.Starring = StringVar()
+        self.Stars = StringVar()
         self.Genres = StringVar()
 
         self.Prod = StringVar()
@@ -43,7 +43,7 @@ class MovieRecords:
 
         self.AudioLanguages = StringVar()
         self.Subtitles = StringVar()
-        self.Writters = StringVar()
+        self.Writers = StringVar()
         self.Producer = StringVar()
 
         self.XRay = StringVar()
@@ -53,7 +53,16 @@ class MovieRecords:
         self.AreSubtitles = StringVar()
 
         """
-        Frames
+        Exit option
+        """
+        def iExit():
+            iExit = tkinter.messagebox.askyesno('Movies Record System', 'Are you sure you want to exit?')
+            if iExit > 0:
+                root.destroy()
+                return
+
+        """
+        Main Frame
         """
         MainFrame = Frame(self.TabControl1, bd=10, width=1350, height=700, relief=RIDGE)
         MainFrame.grid(padx=5, pady=10)
@@ -72,6 +81,17 @@ class MovieRecords:
 
         MovieFrame = Frame(TopFrame, bd=5, width=280, height=50, padx=2, relief=RIDGE)
         MovieFrame.pack(side=TOP, pady=3)
+
+        TopFrame11 = Frame(Tab2Frame, bd=10, width=1340, height=60, relief=RIDGE)
+        TopFrame11.grid(row=0, column=0)
+        TopFrame12 = Frame(Tab2Frame, bd=10, width=280, height=100, relief=RIDGE)
+        TopFrame12.grid(row=1, column=0)
+
+        TopFrame12a = Frame(TopFrame12, bd=10, width=1000, height=100, relief=RIDGE)
+        TopFrame12a.grid(row=1, column=0)
+
+        TopFrame12b = Frame(TopFrame12, bd=10, width=340, height=100, relief=RIDGE)
+        TopFrame12b.grid(row=1, column=1)
         # ---------------------------------------------------------------------------------------------
         self.lblMovieID = Label(MovieFrame, font=('arial', 12, 'bold'), text='Movie ID', bd=7, anchor='w', justify=LEFT)
         self.lblMovieID.grid(row=0, column=0, sticky=W, padx=5, pady=5)
@@ -116,11 +136,11 @@ class MovieRecords:
                                 width=23, textvariable=self.Prod)
         self.txtProd.grid(row=1, column=3)
 
-        self.lblWritter = Label(MovieFrame, font=('arial', 12, 'bold'), text='Writters', bd=7, anchor='w', justify=LEFT)
-        self.lblWritter.grid(row=2, column=2, sticky=W, padx=5, pady=5)
-        self.txtWritter = Entry(MovieFrame, font=('arial', 12, 'bold'), bd=5, justify='left',
-                             width=23, textvariable=self.Writters)
-        self.txtWritter.grid(row=2, column=3)
+        self.lblWriter = Label(MovieFrame, font=('arial', 12, 'bold'), text='Writers', bd=7, anchor='w', justify=LEFT)
+        self.lblWriter.grid(row=2, column=2, sticky=W, padx=5, pady=5)
+        self.txtWriter = Entry(MovieFrame, font=('arial', 12, 'bold'), bd=5, justify='left',
+                               width=23, textvariable=self.Writers)
+        self.txtWriter.grid(row=2, column=3)
 
         self.lblMusic = Label(MovieFrame, font=('arial', 12, 'bold'), text='Music by', bd=7, anchor='w', justify=LEFT)
         self.lblMusic.grid(row=3, column=2, sticky=W, padx=5, pady=5)
@@ -200,12 +220,12 @@ class MovieRecords:
                                     textvariable=self.Description)
         self.txtDescription.grid(row=4, column=1, columnspan=7, ipadx=500)
 
-        self.lblStarring = Label(MovieFrame, font=('arial', 12, 'bold'), text='Starring', bd=7, anchor='w',
+        self.lblStars = Label(MovieFrame, font=('arial', 12, 'bold'), text='Stars', bd=7, anchor='w',
                                     justify=LEFT)
-        self.lblStarring.grid(row=5, column=0, sticky=W, padx=5, pady=5)
-        self.txtStarring = Entry(MovieFrame, font=('arial', 12, 'bold'), bd=5, justify='left', width=23,
-                                    textvariable=self.Starring)
-        self.txtStarring.grid(row=5, column=1, columnspan=7, ipadx=500)
+        self.lblStars.grid(row=5, column=0, sticky=W, padx=5, pady=5)
+        self.txtStars = Entry(MovieFrame, font=('arial', 12, 'bold'), bd=5, justify='left', width=23,
+                                 textvariable=self.Stars)
+        self.txtStars.grid(row=5, column=1, columnspan=7, ipadx=500)
 
         self.lblAudio = Label(MovieFrame, font=('arial', 12, 'bold'), text='Audio languages', bd=7, anchor='w',
                               justify=LEFT)
@@ -220,6 +240,89 @@ class MovieRecords:
         self.txtSubtitles = Entry(MovieFrame, font=('arial', 12, 'bold'), bd=5, justify='left', width=23,
                                   textvariable=self.Subtitles)
         self.txtSubtitles.grid(row=7, column=1, columnspan=7, ipadx=500)
+        # Buttons ---------------------------------------------------------------------------------------
+        self.btnAdd = Button(BottomFrame, pady=1, padx=11, bd=4, font=('arial', 16, 'bold'), bg='cadetblue',
+                             width=10, text='Add New')
+        self.btnAdd.grid(row=0, column=0, padx=1)
+
+        self.btnUpdate = Button(BottomFrame, pady=1, padx=11, bd=4, font=('arial', 16, 'bold'), bg='cadetblue',
+                             width=10, text='Update')
+        self.btnUpdate.grid(row=0, column=1, padx=1)
+
+        self.btnDelete = Button(BottomFrame, pady=1, padx=11, bd=4, font=('arial', 16, 'bold'), bg='cadetblue',
+                             width=10, text='Delete')
+        self.btnDelete.grid(row=0, column=2, padx=1)
+
+        self.btnReset = Button(BottomFrame, pady=1, padx=11, bd=4, font=('arial', 16, 'bold'), bg='cadetblue',
+                             width=10, text='Reset')
+        self.btnReset.grid(row=0, column=3, padx=1)
+
+        self.btnResult = Button(BottomFrame, pady=1, padx=11, bd=4, font=('arial', 16, 'bold'), bg='cadetblue',
+                             width=10, text='Result')
+        self.btnResult.grid(row=0, column=4, padx=1)
+
+        self.btnExit = Button(BottomFrame, pady=1, padx=11, bd=4, font=('arial', 16, 'bold'), bg='cadetblue',
+                             width=10, text='Exit', command=iExit)
+        self.btnExit.grid(row=0, column=5, padx=1)
+
+        """
+        Movie details Frame 
+        """
+        self.lblTitle = Label(TopFrame11, font=('arial', 40, 'bold'), text='Movie Details Database', bd=5,
+                              justify=CENTER)
+        self.lblTitle.grid(padx=168)
+        # ---------------------------------------------------------------------------------------------
+        scroll_x = Scrollbar(TopFrame12a, orient=HORIZONTAL)
+        scroll_y = Scrollbar(TopFrame12a, orient=VERTICAL)
+
+        self.Movie_Record = ttk.Treeview(TopFrame12a, height=22,
+                                         columns=('MovieID', 'Name', 'Directors', 'Stars', 'Genres', 'Description',
+                                                  'ReleaseDate', 'Duration', 'Producer', 'Writer', 'Music',
+                                                  'SubtitlesAvb', 'AudioLanguages', 'Subtitles', 'MovieAgeRating',
+                                                  'HDR', 'UHD'),
+                                         xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
+        scroll_x.pack(side=BOTTOM, fill=X)
+        scroll_y.pack(side=RIGHT, fill=Y)
+
+        self.Movie_Record.heading('MovieID', text='Movie ID')
+        self.Movie_Record.heading('Name', text='Name')
+        self.Movie_Record.heading('Directors', text='Directors')
+        self.Movie_Record.heading('Stars', text='Stars')
+        self.Movie_Record.heading('Genres', text='Genres')
+        self.Movie_Record.heading('Description', text='Description')
+        self.Movie_Record.heading('ReleaseDate', text='Release Date')
+        self.Movie_Record.heading('Duration', text='Duration')
+        self.Movie_Record.heading('Producer', text='Producer')
+        self.Movie_Record.heading('Writer', text='Writer')
+        self.Movie_Record.heading('Music', text='Music')
+        self.Movie_Record.heading('SubtitlesAvb', text='Subtitles Avb')
+        self.Movie_Record.heading('AudioLanguages', text='Audio Languages')
+        self.Movie_Record.heading('Subtitles', text='Subtitles')
+        self.Movie_Record.heading('MovieAgeRating', text='Movie Age Rating')
+        self.Movie_Record.heading('HDR', text='HDR')
+        self.Movie_Record.heading('UHD', text='UHD')
+
+        self.Movie_Record['show'] = 'headings'
+
+        self.Movie_Record.column('MovieID', width=70)
+        self.Movie_Record.column('Name', width=70)
+        self.Movie_Record.column('Directors', width=70)
+        self.Movie_Record.column('Stars', width=90)
+        self.Movie_Record.column('Genres', width=90)
+        self.Movie_Record.column('Description', width=90)
+        self.Movie_Record.column('ReleaseDate', width=90)
+        self.Movie_Record.column('Duration', width=70)
+        self.Movie_Record.column('Producer', width=70)
+        self.Movie_Record.column('Writer', width=70)
+        self.Movie_Record.column('Music', width=70)
+        self.Movie_Record.column('SubtitlesAvb', width=90)
+        self.Movie_Record.column('AudioLanguages', width=90)
+        self.Movie_Record.column('Subtitles', width=90)
+        self.Movie_Record.column('MovieAgeRating', width=110)
+        self.Movie_Record.column('HDR', width=70)
+        self.Movie_Record.column('UHD', width=70)
+
+        self.Movie_Record.pack(fill=BOTH, expand=1)
 
 
 if __name__ == '__main__':
